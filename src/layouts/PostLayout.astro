@@ -1,0 +1,43 @@
+---
+import "../css/main.css";
+
+import FuzzyOverlay from "../components/FuzzyOverlay.astro";
+import Navbar from "../components/Navbar.astro";
+
+const { frontmatter } = Astro.props;
+
+const pubDate = new Date(frontmatter.pubDate);
+const year = pubDate.getFullYear();
+const month = pubDate.toLocaleString("en-US", { month: "long" }).toUpperCase();
+const day = String(pubDate.getDate()).padStart(2, "0");
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no"
+        />
+        <title>{frontmatter.title}</title>
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/liquid.css" />
+    </head>
+
+    <body style="overflow-x: hidden;">
+        <article class="main">
+            <div class="mainborder"></div>
+            <div class="headline">
+                <h6><code>{month}-{day}-{year}</code></h6>
+                <h1>{frontmatter.title}</h1>
+                <h5>{frontmatter.description}</h5>
+            </div>
+            <hr />
+            <slot />
+        </article>
+    </body>
+
+    <Navbar />
+    <FuzzyOverlay />
+</html>

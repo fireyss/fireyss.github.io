@@ -1,0 +1,28 @@
+---
+import noise from "../images/noise.png";
+---
+
+<style>
+    .fuzzyoverlay {
+        position: fixed;
+        inset: -500%;
+        z-index: 6000;
+        opacity: 0.5;
+        animation: shift 0.01s linear infinite;
+        pointer-events: none;
+        mix-blend-mode: multiply;
+        background-size: 3vw;
+    }
+
+    @keyframes shift {
+        0% {
+            transform: translateY(100vw) rotateZ(0deg);
+        }
+
+        100% {
+            transform: translateY(0vw) rotateZ(360deg);
+        }
+    }
+</style>
+
+<div class="fuzzyoverlay" style={`background-image: url(${noise.src})`}></div>
