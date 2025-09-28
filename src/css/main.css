@@ -161,14 +161,22 @@ h6 {
     }
 }
 
+.footnotes {
+    width: 100%;
+}
+
 .footnotes>h2 {
     color: rgb(255, 125, 125);
     font-size: 1.2rem;
 }
 
 .footnotes>*>li {
+    width: 100%;
     padding-left: 0;
     font-size: 0.7em;
+}
+.footnotes>*>li>p {
+    overflow-x: clip;
 }
 
 .title {

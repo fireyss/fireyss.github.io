@@ -25,7 +25,7 @@ These functions
 
 ###### ⚠ more to be added... soon.... ⚠ ⚠ ⚠
 
-[^1]: I am being awfully pedantic here -- but I personally think it'd be funny to mention -- most systems fail to model the diminishing influence of gravity on the projectile. See: [Gravitational Fields](https://en.wikipedia.org/wiki/Gravitational_field)
+[^1]: I am being awfully pedantic here -- but I personally think it'd be funny to mention that most systems fail to model the diminishing influence of gravity on the projectile. See: [Gravitational Fields](https://en.wikipedia.org/wiki/Gravitational_field)
 
 [^2]: https://phys.libretexts.org/Bookshelves/University_Physics/Physics_(Boundless)/3%3A_Two-Dimensional_Kinematics/3.3%3A_Projectile_Motion
 
