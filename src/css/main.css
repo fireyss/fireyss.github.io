@@ -47,6 +47,7 @@ ol {
     margin-bottom: 0;
 }
 
+.katex-display,
 li,
 p {
     margin-top: 0;
@@ -67,6 +68,11 @@ p>code {
 
 p>a {
     text-decoration: underline;
+}
+
+sup{
+    font-size: 0.6em;
+    vertical-align: top;
 }
 
 p>strong,
@@ -157,12 +163,12 @@ h6 {
 
 .footnotes>h2 {
     color: rgb(255, 125, 125);
-    font-size: 1.6rem;
+    font-size: 1.2rem;
 }
 
 .footnotes>*>li {
     padding-left: 0;
-    font-size: 0.9em;
+    font-size: 0.7em;
 }
 
 .title {

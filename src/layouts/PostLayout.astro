@@ -24,13 +24,30 @@ const day = String(pubDate.getDate()).padStart(2, "0");
             name="viewport"
             content="width=device-width, initial-scale=1.0"
         />
-        />
         <title>{frontmatter.title}</title>
-        <link rel="stylesheet" href="css/main.css" />
-        <link rel="stylesheet" href="css/liquid.css" />
-    </head>
 
-    <body style="overflow-x: hidden;">
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
+            integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP"
+            crossorigin="anonymous"
+        />
+
+        <!-- The loading of KaTeX is deferred to speed up page rendering -->
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"
+            integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6"
+            crossorigin="anonymous"></script>
+
+        <!-- To automatically render math in text elements, include the auto-render extension: -->
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"
+            integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh"
+            crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+    </head><body style="overflow-x: hidden;">
         <article class="main">
             <div class="mainborder"></div>
             <div class="headline">
@@ -38,7 +55,7 @@ const day = String(pubDate.getDate()).padStart(2, "0");
                 <h1>{frontmatter.title}</h1>
                 <h5>{frontmatter.description}</h5>
             </div>
-            <hr/>
+            <hr />
             <slot />
         </article>
         <ClientRouter />
@@ -46,4 +63,41 @@ const day = String(pubDate.getDate()).padStart(2, "0");
 
     <Navbar />
     <FuzzyOverlay />
+    <script>
+        import { converter, formatCss } from "culori";
+        let hsl = converter("hsl");
+        document.addEventListener("astro:page-load", () => {
+            const main = document.querySelector(".main");
+            if (!main) return;
+
+            let currentColor = null;
+
+            // Traverse all child elements in order
+            const walker = document.createTreeWalker(
+                main,
+                NodeFilter.SHOW_ELEMENT,
+                null,
+            );
+
+            while (walker.nextNode()) {
+                const node = walker.currentNode;
+
+                if (/^H[1-6]$/.test(node.tagName)) {
+                    let col = hsl(getComputedStyle(node).color);
+                    col.h += 5;
+                    col.s *= 1.2;
+                    col.v *= 1.5;
+                    currentColor = formatCss(col);
+                    console.log();
+                }
+
+                if (
+                    (node.tagName === "STRONG" || node.tagName == "EM") &&
+                    currentColor
+                ) {
+                    node.style.color = currentColor;
+                }
+            }
+        });
+    </script>
 </html>
