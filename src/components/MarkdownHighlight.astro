@@ -1,0 +1,50 @@
+---
+
+---
+
+<script>
+    import { converter, formatCss } from "culori";
+    let hsl = converter("hsl");
+
+    function updatehighlight() {
+        console.log("meow");
+        const main = document.querySelector(".main");
+        if (!main) return;
+
+        let currentColor = null;
+
+        // Traverse all child elements in order
+        const walker = document.createTreeWalker(
+            main,
+            NodeFilter.SHOW_ELEMENT,
+            null,
+        );
+
+        while (walker.nextNode()) {
+            const node = walker.currentNode;
+
+            if (/^H[1-6]$/.test(node.tagName)) {
+                let col = hsl(getComputedStyle(node).color);
+                col.h += 5;
+                col.s *= 1.2;
+                col.v *= 1.5;
+                currentColor = formatCss(col);
+                console.log();
+            }
+
+            if (
+                (node.tagName === "STRONG" || node.tagName == "EM") &&
+                currentColor
+            ) {
+                node.style.color = currentColor;
+            }
+        }
+    }
+    updatehighlight;
+    document.addEventListener("astro:page-load", updatehighlight, {
+        once: true,
+    });
+    document.addEventListener("DOMContentLoaded", updatehighlight, {
+        once: true,
+    });
+</script>
