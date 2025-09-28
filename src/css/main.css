@@ -179,7 +179,7 @@ h6 {
 }
 
 
-@media (max-width: 300px) {
+@media (max-width: 400px) {
     .titlecontainer {
         scale: 0.7;
     }
