@@ -57,19 +57,20 @@ p {
     color: aliceblue;
 
     font-size: 1.3em;
+}
 
-    &>code {
-        font-size: 1.2em;
-        width: 100%;
-    }
+p>code {
+    font-size: 1.2em;
+    width: 100%;
+}
 
-    &>a {
-        text-decoration: underline;
-    }
+p>a {
+    text-decoration: underline;
+}
 
-    & > strong, & > em {
-        color: #ffa2a2;
-    }
+p>strong,
+p>em {
+    color: #ffa2a2;
 }
 
 h1 {
@@ -102,16 +103,14 @@ h6 {
     font-size: 1.4em;
 }
 
-.footnotes {
-    &>h2 {
-        color: rgb(255, 125, 125);
-        font-size: 1.6rem;
-    }
+.footnotes>h2 {
+    color: rgb(255, 125, 125);
+    font-size: 1.6rem;
+}
 
-    &>*>li {
-        padding-left: 0;
-        font-size: 0.9em;
-    }
+.footnotes>*>li {
+    padding-left: 0;
+    font-size: 0.9em;
 }
 
 .title {
@@ -215,12 +214,12 @@ h6 {
     left: 0;
     right: 0;
     border-bottom: 1px dashed #bb9af700;
+}
 
-    &.minimized {
-        backdrop-filter: blur(35px);
-        height: 75px;
-        border-bottom: 1px dashed #bb9af73b;
-    }
+.navbar.minimized {
+    backdrop-filter: blur(35px);
+    height: 75px;
+    border-bottom: 1px dashed #bb9af73b;
 }
 
 .navcontainer {
@@ -255,101 +254,93 @@ h6 {
     letter-spacing: 1.5px;
 
     transition: all 0.3s ease;
+}
 
+.navbutton.active {
+    color: #aa7cd6;
+    font-variation-settings: "wght" 1000;
+}
 
-    &.active {
-        color: #aa7cd6;
-        font-variation-settings: "wght" 1000;
-    }
-
-    &:hover {
-        color: #c9bccf;
-        font-variation-settings: "wght" 700;
-    }
+.navbutton:hover {
+    color: #c9bccf;
+    font-variation-settings: "wght" 700;
 }
 
 .articlecontainer {
     width: 100%;
     margin-top: 25px;
-
     display: flex;
     z-index: 0;
-
-
-    &>.ad {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        align-content: center;
-        justify-content: center;
-
-        width: 100%;
-        max-width: 60px;
-        /* height: 100%; */
-
-        font-family: InterVariable;
-        color: #89858b;
-        font-variation-settings: "wght" 400;
-
-        &>div {
-            margin: -1px;
-            font-size: 1.25rem;
-        }
-
-        &>div:first-child {
-            font-size: 1.125rem;
-        }
-
-        &>div:last-child {
-            margin: -4px;
-            font-size: 2rem;
-        }
-    }
-
-    &>.ahl {
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        justify-content: center;
-        width: 100%;
-
-        & *:first-child {
-            margin-top: -5px;
-            left: 0;
-            width: 90%;
-            text-decoration: none;
-
-            & * {
-                font-size: 2rem;
-
-
-                transition: all 0.3s ease;
-
-
-                &.active {
-                    color: #aa7cd6;
-                }
-
-                &:hover {
-                    color: #c9bccf;
-                }
-            }
-        }
-
-        & * {
-            margin-top: 0;
-        }
-    }
 }
 
-.headline {
-    & * {
-        margin-top: 0px;
-    }
+.articlecontainer>.ad {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
 
-    & *:first-child {
-        text-align: right;
-    }
+    width: 100%;
+    max-width: 60px;
+
+    font-family: InterVariable;
+    color: #89858b;
+    font-variation-settings: "wght" 400;
+}
+
+.articlecontainer>.ad>div {
+    margin: -1px;
+    font-size: 1.25rem;
+}
+
+.articlecontainer>.ad>div:first-child {
+    font-size: 1.125rem;
+}
+
+.articlecontainer>.ad>div:last-child {
+    margin: -4px;
+    font-size: 2rem;
+}
+
+.articlecontainer>.ahl {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.articlecontainer>.ahl *:first-child {
+    margin-top: -5px;
+    left: 0;
+    width: 90%;
+    text-decoration: none;
+}
+
+.articlecontainer>.ahl *:first-child * {
+    font-size: 2rem;
+    transition: all 0.3s ease;
+}
+
+.articlecontainer>.ahl *:first-child *.active {
+    color: #aa7cd6;
+}
+
+.articlecontainer>.ahl *:first-child *:hover {
+    color: #c9bccf;
+}
+
+.articlecontainer>.ahl * {
+    margin-top: 0;
+}
+
+
+.headline * {
+    margin-top: 0px;
+}
+
+.headline *:first-child {
+    text-align: right;
 }
 
 
