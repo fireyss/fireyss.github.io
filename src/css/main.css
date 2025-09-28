@@ -174,8 +174,10 @@ h6 {
     width: 100%;
     padding-left: 0;
     font-size: 0.7em;
+    font-variation-settings: "wght" 700;
 }
 .footnotes>*>li>p {
+    font-variation-settings: "wght" 700;
     overflow-x: clip;
 }
 
