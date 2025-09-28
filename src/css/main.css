@@ -38,7 +38,7 @@ h5,
 h6 {
     font-family: InterVariable;
     width: 100%;
-    margin-top: 25px;
+    margin-top: 10px;
     margin-bottom: 0;
 }
 
@@ -49,25 +49,37 @@ ol {
 
 li,
 p {
+    margin-top: 0;
+    padding-left: 20px;
     font-family: InterVariable;
     width: 100%;
 
     color: aliceblue;
 
+    font-size: 1.3em;
+
     &>code {
-        font-size: 1.3em;
+        font-size: 1.2em;
         width: 100%;
+    }
+
+    &>a {
+        text-decoration: underline;
+    }
+
+    & > strong, & > em {
+        color: #ffa2a2;
     }
 }
 
 h1 {
-    color: rgb(226, 114, 122);
+    color: rgb(255, 125, 125);
     font-size: 3.7rem;
 }
 
 h2 {
     color: rgb(224, 175, 104);
-    font-size: 3.5rem;
+    font-size: 3rem;
 }
 
 h3 {
@@ -88,6 +100,18 @@ h5 {
 h6 {
     color: rgb(187, 154, 247);
     font-size: 1.4em;
+}
+
+.footnotes {
+    &>h2 {
+        color: rgb(255, 125, 125);
+        font-size: 1.6rem;
+    }
+
+    &>*>li {
+        padding-left: 0;
+        font-size: 0.9em;
+    }
 }
 
 .title {
@@ -257,6 +281,7 @@ h6 {
         align-items: center;
         flex-direction: column;
         align-content: center;
+        justify-content: center;
 
         width: 100%;
         max-width: 60px;

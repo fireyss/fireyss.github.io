@@ -11,16 +11,16 @@ import noise from "../images/noise.png";
         animation: shift 0.01s linear infinite;
         pointer-events: none;
         mix-blend-mode: multiply;
-        background-size: 3vw;
+        background-size: 5vw;
     }
 
     @keyframes shift {
         0% {
-            transform: translateY(100vw) rotateZ(0deg);
+            transform: translateY(-25vw) translateX(50vw);
         }
 
         100% {
-            transform: translateY(0vw) rotateZ(360deg);
+            transform: translateY(0vw) translateX(0vw);
         }
     }
 </style>
