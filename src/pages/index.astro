@@ -1,6 +1,8 @@
 ---
 import "../css/main.css";
 
+import { ClientRouter } from "astro:transitions";
+
 import FuzzyOverlay from "../components/FuzzyOverlay.astro"
 import Navbar from "../components/Navbar.astro";
 
@@ -233,178 +235,191 @@ const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true })
         </div>
     </div>
     <script>
-		import gsap from "gsap"
-        const tl = gsap.timeline({
-            defaults: { ease: "power4.out", duration: 0.7 },
+        import gsap from "gsap"
+        let stopping = false
+        document.addEventListener("astro:before-swap", (event) => {
+            stopping = true
         });
-        const d = 2;
-        let ox = 150;
-        let oy = 112.5;
+		document.addEventListener("astro:page-load", () => {
+            const titleElement = document.querySelector(".titlecontainer");
+            if (!titleElement) {
+                return; // exit early
+            }
 
-        // fireys title anim
-        gsap.set("#T", {
-            // x: ox,
-            // y: oy,
-            scale: 3,
-            skewX: 30,
-            skewY: 60,
-            rotation: -30,
-        });
-        gsap.to("#T", {
-            scale: 1.1,
-            skewX: 0,
-            skewY: 0,
-            duration: d,
-            ease: "elastic",
-            stagger: 0.1,
-        });
-        gsap.to("#T", {
-            autoAlpha: 1,
-            rotation: 0,
-            duration: d * 0.6,
-            stagger: 0.1,
-        }); 
-        gsap.set("#Tb", {
-            // x: ox,
-            // y: oy,
-            scale: 3,
-            skewX: 30,
-            skewY: 60,
-            rotation: -30,
-        });
-        gsap.to("#Tb", {
-            scale: 1.1,
-            skewX: 0,
-            skewY: 0,
-            duration: d,
-            ease: "elastic",
-            stagger: 0.1,
-        });
-        gsap.to("#Tb", {
-            autoAlpha: 1,
-            rotation: 0,
-            duration: d * 0.6,
-            stagger: 0.1,
-        });
-        gsap.set("#S", {
-            scale: 3,
-            skewX: 30,
-            skewY: 60,
-            rotation: -30,
-            x: 5 + ox,
-            y: 3 + oy,
-        });
-        gsap.to("#S", {
-            scale: 1.1,
-            skewX: 0,
-            skewY: 0,
-            duration: d,
-            ease: "elastic",
-            stagger: 0.1,
-        });
-        gsap.to("#S", {
-            autoAlpha: 1,
-            rotation: 0,
-            duration: d * 0.6,
-            stagger: 0.1,
-        });
+            stopping = false
+            const d = 2;
+            let ox = 150;
+            let oy = 112.5;
 
-        // fireys splatter anim
-        gsap.set("#EllipseSplatter", {
-            scale: 1,
-            autoAlpha: 0,
-        });
-        gsap.from("#EllipseSplatter", {
-            scale: 1,
-            skewX: -40,
-            skewY: -20,
-            stagger: 0.03,
-            duration: 5,
-            cx: 50,
-            cy: 150,
-            ease: "elastic",
-            delay: 0.5,
-        });
-        gsap.to("#EllipseSplatter", {
-            autoAlpha: 1,
-            stagger: 0.03,
-            duration: 0.5,
-            delay: 0.5,
-        });
-        gsap.to("#EllipseSplatter", {
-            fill: "#7472A5",
-            stagger: 0.015,
-            duration: 0.3,
-            delay: 2,
-        });
-
-        // title text anim
-        gsap.from("#body", {
-            opacity: 0,
-            x: 20,
-            duration: 0.4,
-            delay: 0.2,
-            ease: "sine",
-            stagger: 0.1
-        })
-
-        let mx = visualViewport.width / 2;
-        let my = visualViewport.height / 2;
-        document.addEventListener("pointermove", function (e) {
-            mx = e.pageX;
-            my = e.pageY;
-        });
-
-        let lastUpdate = Date.now();
-
-        let revealed = window.pageYOffset > 5
-        let lastrevealed = revealed
-
-        function onLoop() {
-            let now = Date.now();
-            let dt = now - lastUpdate;
-            requestAnimationFrame(onLoop);
-
-            revealed = window.pageYOffset > 5
-
-            let sX = Math.sin(now * 0.002) * 20;
-            let sY = Math.cos(now * 0.002) * 20;
-            let mpX = visualViewport.width / 2;
-            let mpY = visualViewport.height / 2;
-            // ox = gsap.getProperty("#Title", 'width') / 4
-            let mmX = (mpX - mx) / mpX;
-            let mmY = (mpY - my) / mpY;
+            // fireys title anim
+            gsap.set("#T", {
+                // x: ox,
+                // y: oy,
+                scale: 3,
+                skewX: 30,
+                skewY: 60,
+                rotation: -30,
+            });
             gsap.to("#T", {
-                duration: 0.5,
-                x: mmX * 25 + ox + sX,
-                y: mmY * 25 + oy + sY,
-                stagger: 0.05,
+                scale: 1.1,
+                skewX: 0,
+                skewY: 0,
+                duration: d,
+                ease: "elastic",
+                stagger: 0.1,
+            });
+            gsap.to("#T", {
+                autoAlpha: 1,
+                rotation: 0,
+                duration: d * 0.6,
+                stagger: 0.1,
+            }); 
+            gsap.set("#Tb", {
+                // x: ox,
+                // y: oy,
+                scale: 3,
+                skewX: 30,
+                skewY: 60,
+                rotation: -30,
             });
             gsap.to("#Tb", {
-                duration: 0.5,
-                x: mmX * 25 + ox + sX,
-                y: mmY * 25 + oy + sY,
-                stagger: 0.05,
+                scale: 1.1,
+                skewX: 0,
+                skewY: 0,
+                duration: d,
+                ease: "elastic",
+                stagger: 0.1,
+            });
+            gsap.to("#Tb", {
+                autoAlpha: 1,
+                rotation: 0,
+                duration: d * 0.6,
+                stagger: 0.1,
+            });
+            gsap.set("#S", {
+                scale: 3,
+                skewX: 30,
+                skewY: 60,
+                rotation: -30,
+                x: 5 + ox,
+                y: 3 + oy,
             });
             gsap.to("#S", {
-                duration: 0.56,
-                x: mmX * 25 + 5 + ox + sX,
-                y: mmY * 25 + 3 + oy + sY,
-                stagger: 0.05,
+                scale: 1.1,
+                skewX: 0,
+                skewY: 0,
+                duration: d,
+                ease: "elastic",
+                stagger: 0.1,
             });
-            sX = Math.sin(now * 0.001) * 15;
-            sY = Math.cos(now * 0.002) * 15;
-            gsap.to("#EllipseSplatter", {
-                duration: 0.1,
-                x: mmX * 10 + ox - 50 + sX,
-                y: mmY * 10 + oy - 30 + sY,
-                stagger: 0.005,
+            gsap.to("#S", {
+                autoAlpha: 1,
+                rotation: 0,
+                duration: d * 0.6,
+                stagger: 0.1,
             });
 
-            lastUpdate = Date.now();
-        }
-        requestAnimationFrame(onLoop);
+            // fireys splatter anim
+            gsap.set("#EllipseSplatter", {
+                scale: 1,
+                autoAlpha: 0,
+            });
+            gsap.from("#EllipseSplatter", {
+                scale: 1,
+                skewX: -40,
+                skewY: -20,
+                stagger: 0.03,
+                duration: 5,
+                cx: 50,
+                cy: 150,
+                ease: "elastic",
+                delay: 0.5,
+            });
+            gsap.to("#EllipseSplatter", {
+                autoAlpha: 1,
+                stagger: 0.03,
+                duration: 0.5,
+                delay: 0.5,
+            });
+            gsap.to("#EllipseSplatter", {
+                fill: "#7472A5",
+                stagger: 0.015,
+                duration: 0.3,
+                delay: 2,
+            });
+
+            // title text anim
+            gsap.from("#body", {
+                opacity: 0,
+                x: 20,
+                duration: 0.4,
+                delay: 0.2,
+                ease: "sine",
+                stagger: 0.1
+            })
+
+            let mx = visualViewport.width / 2;
+            let my = visualViewport.height / 2;
+            document.addEventListener("pointermove", function (e) {
+                mx = e.pageX;
+                my = e.pageY;
+            });
+
+            let lastUpdate = Date.now();
+
+            let revealed = window.pageYOffset > 5
+            let lastrevealed = revealed
+
+            function onLoop() {
+                let now = Date.now();
+                let dt = now - lastUpdate;
+                if (stopping) {
+                    return
+                }
+                requestAnimationFrame(onLoop);
+
+                revealed = window.pageYOffset > 5
+
+                let sX = Math.sin(now * 0.002) * 20;
+                let sY = Math.cos(now * 0.002) * 20;
+                let mpX = visualViewport.width / 2;
+                let mpY = visualViewport.height / 2;
+                // ox = gsap.getProperty("#Title", 'width') / 4
+                let mmX = (mpX - mx) / mpX;
+                let mmY = (mpY - my) / mpY;
+                gsap.to("#T", {
+                    duration: 0.5,
+                    x: mmX * 25 + ox + sX,
+                    y: mmY * 25 + oy + sY,
+                    stagger: 0.05,
+                });
+                gsap.to("#Tb", {
+                    duration: 0.5,
+                    x: mmX * 25 + ox + sX,
+                    y: mmY * 25 + oy + sY,
+                    stagger: 0.05,
+                });
+                gsap.to("#S", {
+                    duration: 0.56,
+                    x: mmX * 25 + 5 + ox + sX,
+                    y: mmY * 25 + 3 + oy + sY,
+                    stagger: 0.05,
+                });
+                sX = Math.sin(now * 0.001) * 15;
+                sY = Math.cos(now * 0.002) * 15;
+                gsap.to("#EllipseSplatter", {
+                    duration: 0.1,
+                    x: mmX * 10 + ox - 50 + sX,
+                    y: mmY * 10 + oy - 30 + sY,
+                    stagger: 0.005,
+                });
+
+                lastUpdate = Date.now();
+            }
+            requestAnimationFrame(onLoop);
+        })
     </script>
+<ClientRouter />
 </body>
 
 <Navbar />

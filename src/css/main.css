@@ -71,7 +71,7 @@ p>a {
 
 p>strong,
 p>em {
-    color: #ffa2a2;
+    color: #b2e9ad;
 }
 
 h1 {
@@ -86,7 +86,7 @@ h2 {
 
 h3 {
     color: rgb(158, 206, 106);
-    font-size: 2.7rem;
+    font-size: 2.4rem;
 }
 
 h4 {
@@ -127,7 +127,7 @@ h6 {
 
     h1 {
         color: rgb(255, 125, 125);
-        font-size: 3rem;
+        font-size: 2.4rem;
     }
 
     h2 {
@@ -152,7 +152,7 @@ h6 {
 
     h6 {
         color: rgb(187, 154, 247);
-        font-size: 0.8em;
+        font-size: 1em;
     }
 }
 

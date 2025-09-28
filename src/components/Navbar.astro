@@ -3,7 +3,8 @@
 ---
 
 <script>
-    const navbarHTML = `
+    document.addEventListener("astro:page-load", () => {
+        const navbarHTML = `
         <div class="navbar">
             <div class="navcontainer">
                 <a href="/" class="navbutton" data-page="me">ME</a>
@@ -13,40 +14,43 @@
             </div>
         </div>
     `;
-    document.body.insertAdjacentHTML("afterbegin", navbarHTML);
+        document.body.insertAdjacentHTML("afterbegin", navbarHTML);
 
-    const pathname = window.location.pathname.toLowerCase();
-    let activePage = "me"; // default
+        const pathname = window.location.pathname.toLowerCase();
+        let activePage = "me"; // default
 
-    if (pathname.includes("blog")) {
-        activePage = "blog";
-    } else if (pathname.includes("contact")) {
-        activePage = "contact";
-    }
-
-    const navButtons = document.querySelectorAll(".navbutton");
-    navButtons.forEach((button) => {
-        if (button.getAttribute("data-page") === activePage) {
-            button.classList.add("active");
+        if (pathname.includes("blog") || pathname.includes("post")) {
+            activePage = "blog";
+        } else if (pathname.includes("contact")) {
+            activePage = "contact";
         }
+
+        const navButtons = document.querySelectorAll(".navbutton");
+        navButtons.forEach((button) => {
+            if (button.getAttribute("data-page") === activePage) {
+                button.classList.add("active");
+            }
+        });
+
+        const navbar = document.querySelector(".navbar");
+
+        function update() {
+            if (window.scrollY > 50) {
+                navbar.classList.add("minimized");
+            } else {
+                navbar.classList.remove("minimized");
+            }
+        }
+        window.addEventListener("scroll", update);
+        update();
     });
-
-    const navbar = document.querySelector(".navbar");
-
-    function update() {
-        if (window.scrollY > 50) {
-            navbar.classList.add("minimized");
-        } else {
-            navbar.classList.remove("minimized");
-        }
-    }
-    window.addEventListener("scroll", update);
-    update();
 </script><noscript>
     <div class="navbar minimized">
         <div class="navcontainer">
             <a href="/" class="navbutton" data-page="me">ME</a>
-            <a href="Projects" class="navbutton" data-page="projects">PROJECTS</a>
+            <a href="Projects" class="navbutton" data-page="projects"
+                >PROJECTS</a
+            >
             <a href="Blog" class="navbutton" data-page="blog">BLOG</a>
             <a href="Contact" class="navbutton" data-page="contact">CONTACT</a>
         </div>
