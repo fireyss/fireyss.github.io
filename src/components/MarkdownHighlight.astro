@@ -7,7 +7,6 @@
     let hsl = converter("hsl");
 
     function updatehighlight() {
-        console.log("meow");
         const main = document.querySelector(".main");
         if (!main) return;
 
@@ -41,9 +40,7 @@
         }
     }
     updatehighlight;
-    document.addEventListener("astro:page-load", updatehighlight, {
-        once: true,
-    });
+    document.addEventListener("astro:page-load", updatehighlight);
     document.addEventListener("DOMContentLoaded", updatehighlight, {
         once: true,
     });

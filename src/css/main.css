@@ -110,6 +110,18 @@ h6 {
     font-size: 1.4em;
 }
 
+blockquote {
+  font-style: italic;
+  color: #555;
+  border-left: 4px solid #BB9AF7;
+  padding: 10px 20px;
+  margin: 20px 0;
+}
+blockquote>p {
+    margin: 0;
+}
+
+
 @media (max-width:700px) {
 
     li,
@@ -347,7 +359,7 @@ h6 {
     align-items: center;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
+    justify-content: space-around;
 
     width: 100%;
     max-width: 60px;
@@ -403,6 +415,9 @@ h6 {
     margin-top: 0;
 }
 
+.headline {
+    width: 100%;
+}
 
 .headline * {
     margin-top: 0px;

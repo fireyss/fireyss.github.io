@@ -1,0 +1,76 @@
+---
+import "../css/main.css";
+
+import { ClientRouter } from "astro:transitions";
+
+import FuzzyOverlay from "../components/FuzzyOverlay.astro";
+import Navbar from "../components/Navbar.astro";
+
+const pageTitle = "Home";
+import blueback from "../images/background.png";
+import oranback from "../images/backgroundorange.png";
+
+const allPosts = Object.values(
+    import.meta.glob("./projects/*.md", { eager: true }),
+);
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fireys</title>
+    </head>
+
+    <body style="overflow-x: hidden;">
+        <div class="main" id="reveal">
+            <div class="mainborder"></div>
+            <h1>Projects:</h1>
+            {
+                allPosts
+                    .sort((a: any, b: any) => {
+                        return (
+                            new Date(b.frontmatter.pubDate).getTime() -
+                            new Date(a.frontmatter.pubDate).getTime()
+                        );
+                    })
+                    .slice(0, 3)
+                    .map((post: any) => {
+                        const pubDate = new Date(post.frontmatter.pubDate);
+                        const year = pubDate.getFullYear();
+                        const month = pubDate
+                            .toLocaleString("en-US", { month: "short" })
+                            .toUpperCase();
+                        const day = String(pubDate.getDate()).padStart(2, "0");
+
+                        return (
+                            <div class="articlecontainer">
+                                <div class="ad">
+                                    <div>{year}</div>
+                                    <div>{month}</div>
+                                    <div>{day}</div>
+                                </div>
+                                <div class="ahl">
+                                    <a href={post.url}>
+                                        <h4>{post.frontmatter.title}</h4>
+                                    </a>
+                                    <h6>{post.frontmatter.description}</h6>
+                                </div>
+                            </div>
+                        );
+                    })
+            }
+            <p>
+                <a href="Blog" data-page="blog" style="text-align: left;"
+                    >Read more</a
+                >
+            </p>
+            <hr />
+        </div>
+    </body>
+
+    <Navbar />
+    <FuzzyOverlay />
+    <ClientRouter />
+</html>
